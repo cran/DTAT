@@ -1,0 +1,12 @@
+name: TheCost
+title: TheCost
+username:
+account: dnc-llc
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 231181
+bundleId: 1055060
+url: https://dnc-llc.shinyapps.io/TheCost/
+when: 1509553402.92572
+asMultiple: FALSE
+asStatic: FALSE

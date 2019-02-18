@@ -1,0 +1,15 @@
+year <- sub("-.*", "", meta$Date)
+note <- sprintf("R package version %s", meta$Version)
+
+bibentry(bibtype = "Article",
+	title = "Dose {Titration} {Algorithm} {Tuning} ({DTAT}) should supersede 'the' {Maximum} {Tolerated} {Dose} ({MTD}) in oncology dose-finding trials",
+	volume = "6",
+	issn = "2046-1402",
+	url = "https://f1000research.com/articles/6-112/v2",
+	doi = "10.12688/f1000research.10624.2",
+	language = "en",
+	journal = "F1000Research",
+	author = "David C. Norris",
+	month = "March",
+	year = "2017")
+	

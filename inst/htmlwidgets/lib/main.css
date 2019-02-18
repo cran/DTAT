@@ -1,0 +1,146 @@
+.svg-container { 
+	display: inline-block;
+	position: relative;
+	width: 100%;
+	vertical-align: middle; 
+	overflow: hidden; 
+}
+
+/* Show DIV and SVG element borders for situational awareness */
+/*
+div {
+    border: 1px dashed black;
+}
+
+svg {
+    border: 1px solid magenta;
+}
+*/
+.sim-dist {
+    stroke: gray;
+    stroke-opacity: 0.2;
+    fill: none;
+    stroke-width: 6;
+}
+
+.surv-line {
+    stroke: black;
+    stroke-opacity: 0.8;
+    fill: none;
+    stroke-width: 2;
+}
+
+.conf-line {
+    stroke: black;
+    stroke-dasharray: 5,5;
+    stroke-opacity: 0.8;
+    fill: none;
+    stroke-width: 1;
+}
+
+.mtd-pointer {
+    stroke-dasharray: 3,1;
+    stroke-opacity: 0.5;
+    fill: none;
+    stroke-width: 3;
+}
+
+.bypass-rule {
+    stroke: green;
+    stroke-width: 0.4;
+}
+
+.stop-rule {
+    stroke: red;
+    stroke-width: 0.25;
+}
+
+.dosemarker {
+    fill-opacity: 0.0;
+    stroke-width: 3;
+    stroke-opacity: 0.7;
+    fill: white;
+}
+
+.dosemarker.salient {
+    stroke-width: 4;
+    stroke-opacity: 1.0;
+}
+
+.stop-esc {
+    stroke: black;
+    stroke-dasharray: 5,3;
+    stroke-opacity: 1;
+    stroke-width: 1.0;
+}
+
+.period-end {
+    stroke: black;
+    stroke-opacity: 0.15;
+    stroke-width: 1.5;
+}
+
+.period-end.salient {
+    stroke-width: 4;
+}
+
+.trace {
+    stroke: lightgray;
+    stroke-width: 16;
+    stroke-linecap: round;
+    stroke-opacity: 0.4;
+    visibility: hidden;
+    fill: none;
+}
+
+.trace.salient {
+    visibility: visible;    
+}
+
+.tooltip {
+  position: absolute;
+  text-align: center;
+  width: 125px;
+  height: 14px;
+  padding: 2px;
+  font: 12px sans-serif;
+  background: yellow;
+  border: 0;
+  border-radius: 8px;
+  pointer-events: none;
+}
+
+.label {
+  font: 14px sans-serif;
+}
+
+.per.label {
+  font: 12px sans-serif;
+}
+
+.footer {
+  position: absolute;
+}
+
+dl {
+  padding: 0.5em;
+  margin: 10px;
+  font-size: normal;
+}
+
+dt {
+  float: left;
+  clear: left;
+  width: 90px;
+  text-align: right;
+  font-weight: bold;
+  color: green;
+}
+
+dt::after {
+  content: ":";
+}
+
+dd {
+  margin: 0 0 0 100px;
+}
