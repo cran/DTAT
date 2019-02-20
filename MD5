@@ -1,4 +1,4 @@
-dad60b83e08e26e7a563a9413f5ac469 *DESCRIPTION
+6e28796276ab1c9138ee5c23cb6b67d4 *DESCRIPTION
 cd97ffcd04c38c889a18fec7816aae55 *LICENSE
 3b6221823101a4706b8e18d9acc25f68 *NAMESPACE
 8e64d17b18ee706cefa14aa6db71bb37 *R/AllClass.R
@@ -18,9 +18,11 @@ df68cee660a03b12472d1b0cf7a5c3bb *R/seq.function.R
 0c8962e17792926c72b3bbdb78cd0c75 *data/de.bioRxiv.240846.rda
 0fbdac4d749ccdb7d44acc37bd7c234f *data/dtat1000.rda
 e8017f7d16ee8ff9d6a4149d3f0563ba *inst/CITATION
+ac00389483fefb58035e5c8795a1ed16 *inst/doc/DTAT-package.bib
 77014647aa39995d1df18d4bb0d6a352 *inst/doc/Designing-33PC.R
 a10aa18376b1e44cc172345f96b656a6 *inst/doc/Designing-33PC.Rmd
 330e4e452f50e0e951a10f86e0553193 *inst/doc/Designing-33PC.html
+33243a5923f03566dfdd37ee374e4197 *inst/doc/widget_D3-viz.html
 018ba2d9e63dfb838c42c9d35fcbec75 *inst/htmlwidgets/lib/data.js
 a3aa8b9ae68ccbc41797feee5b07d131 *inst/htmlwidgets/lib/ds-plot.js
 f21ac4167059b16f3bdddd19cd18cb70 *inst/htmlwidgets/lib/exx.js
