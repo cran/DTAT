@@ -18,7 +18,7 @@ simulated.}
 \item{data}{Passed through as the \code{data} argument of the \code{pomp}
 constructor.}
 
-\item{delta.t}{Time-step (in hours) of pomp's \code{euler.sim} plug-in.}
+\item{delta.t}{Time-step (in hours) of pomp's \code{euler} plug-in.}
 }
 \value{
 No value is returned; rather, the function sets global variables
@@ -60,7 +60,7 @@ for (id in 1:sim$N) {
   out <- trajectory(sim$pkpd,
                     params=c(sim$pop[sim$pop$id==id, -which(names(sim$pop) \%in\% c('id','MTT'))]
                              , sigma=0.05, dose=100, duration=1),
-                    as.data.frame=TRUE)
+                    format="data.frame")
   # drop 'traj' and shift 'time' to first column
   out <- out[,c('time',setdiff(colnames(out),c('time','traj')))]
   out$id <- paste("id",id,sep="")

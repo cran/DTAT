@@ -12,7 +12,7 @@
 #' simulated.
 #' @param data Passed through as the \code{data} argument of the \code{pomp}
 #' constructor.
-#' @param delta.t Time-step (in hours) of pomp's \code{euler.sim} plug-in.
+#' @param delta.t Time-step (in hours) of pomp's \code{euler} plug-in.
 #' @return No value is returned; rather, the function sets global variables
 #' in package environment \code{DTAT::sim}.
 #' 
@@ -65,7 +65,7 @@
 #'   out <- trajectory(sim$pkpd,
 #'                     params=c(sim$pop[sim$pop$id==id, -which(names(sim$pop) %in% c('id','MTT'))]
 #'                              , sigma=0.05, dose=100, duration=1),
-#'                     as.data.frame=TRUE)
+#'                     format="data.frame")
 #'   # drop 'traj' and shift 'time' to first column
 #'   out <- out[,c('time',setdiff(colnames(out),c('time','traj')))]
 #'   out$id <- paste("id",id,sep="")
@@ -198,81 +198,43 @@ function(N, cycle.length.days=21,
   CircMin += dt*( dropToNadir ? _DCirc : 0.0 );
   tNadir  += dt*( initialHump || dropToNadir ? 1.0 : 0.0 );
 "
-  pkpd.txform <- "
-  TCirc0 = log(Circ0);
-  TkTR = log(kTR);
-  TEmax = log(Emax);
-  TEC50 = log(EC50);
-  TCL = log(CL);
-  TQ = log(Q);
-  TVc = log(Vc);
-  TVp = log(Vp);
-  Tsigma = log(sigma);
-  Tdose = log(dose);
-  Tduration = log(duration);
-"
-  pkpd.txback <- "
-  TCirc0 = exp(Circ0);
-  TkTR = exp(kTR);
-  TEmax = exp(Emax);
-  TEC50 = exp(EC50);
-  TCL = exp(CL);
-  TQ = exp(Q);
-  TVc = exp(Vc);
-  TVp = exp(Vp);
-  Tsigma = exp(sigma);
-  Tdose = exp(dose);
-  Tduration = exp(duration);
-"
   #Tmax <- cycle.length.days*24 # solve for full 21 days of 3-week cycle
   #df <- data.frame(time=c(seq(0.0, 1.95, 0.05), # q3min for 2h, 
   #                        seq(2.0, Tmax, 1.0)), # then hourly until Tmax
   #                 y=NA)
-  # This higher-order function returns an initializer yielding given 'start.state'
-  inits_fac <- function(start.state=NULL){
-    if(is.null(start.state)){
-      inits <- function(params, t0, ...){
-        params <- as.list(params)
-        state <- c(Cc = 0.0
-                   ,Cp = 0.0
-                   ,Prol = params$Circ0
-                   ,Tx.1 = params$Circ0
-                   ,Tx.2 = params$Circ0
-                   ,Tx.3 = params$Circ0
-                   ,Circ = params$Circ0
-                   ,Circ.0 = params$Circ0
-                   ,CircMin = params$Circ0
-                   ,tNadir = t0
-        )
-        state
-      }
-    } else {
-      inits <- function(params, t0, ...){
-        state <- start.state
-        state['Circ.0'] <- unname(state['Circ'])
-        state['CircMin'] <- unname(state['Circ'])
-        state['tNadir'] <- t0
-        state
-      }
-    }
-    inits
+  # This 'rinit' function implements the rinit_spec design new in pomp v2:
+  rinit_fun <- function(Circ0, t0=0, ...){
+    state <- c(Cc = 0.0
+               ,Cp = 0.0
+               ,Prol = Circ0
+               ,Tx.1 = Circ0
+               ,Tx.2 = Circ0
+               ,Tx.3 = Circ0
+               ,Circ = Circ0
+               ,Circ.0 = Circ0
+               ,CircMin = Circ0
+               ,tNadir = t0
+    )
+    state
   }
-  vectorfield <- NULL # avoids R CMD check NOTE 'no visible global function def' from below
+  # NULL defs to avoid R CMD check NOTEs 'no visible global function def':
+  vectorfield <- euler <- parameter_trans <- NULL
   pkpd <- pomp(data = data
                , times="time", t0=0
                , skeleton=vectorfield(Csnippet(pkpd.skel))
-               , rprocess = euler.sim(step.fun = Csnippet(pkpd.step), delta.t = delta.t)
+               , rprocess = euler(step.fun = Csnippet(pkpd.step), delta.t = delta.t)
                , rmeasure = Csnippet(pkpd.rmeas)
                , dmeasure = Csnippet(pkpd.dmeas)
-               , initializer = inits_fac()
+               , rinit = rinit_fun
                , rprior = Csnippet(pkpd.rprior)
                , dprior = Csnippet(pkpd.dprior)
                , statenames=c("Cc", "Cp", "Prol", "Tx.1", "Tx.2", "Tx.3", "Circ","Circ.0","CircMin","tNadir")
                , paramnames=c("Circ0","kTR","gamma","Emax","EC50","CL","Q","Vc","Vp"
                               ,"sigma","dose","duration"
                )
-               , toEstimationScale = Csnippet(pkpd.txform)
-               , fromEstimationScale = Csnippet(pkpd.txback)
+               , partrans = parameter_trans(log=c("Circ0","kTR","Emax","EC50",
+                                                  "CL","Q","Vc","Vp","sigma",
+                                                  "dose","duration"))
   )
   params.default <- c(Circ0=5050, kTR=4/89.3, gamma=0.163, Emax=83.9, EC50=7.17*0.808,
                       CL=32.6, Q=5.34, Vc=5.77, Vp=11.0, sigma=0.05, dose=50, duration=1.0
@@ -307,7 +269,6 @@ function(N, cycle.length.days=21,
                ,print=FALSE
   )
   sim$pkpd <- pkpd
-  sim$inits_fac <- inits_fac
   sim$params.default <- params.default
   sim$pop <- pop
   sim$N <- N

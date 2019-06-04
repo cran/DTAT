@@ -73,7 +73,6 @@ function(draw.days=NULL, Ncycles=10,
   stopifnot(sim$N <= nrow(sim$pop))
   # Find the ANC nadirs of all 25 IDs, checking ANCs on (integer-vector) draw.days
   # We will accumulate data about each course of treatment into this data frame.
-  pkpd <- sim$pkpd # Obtain a local copy
   anc.ts <- data.frame() # This will be used to collect an hourly 'Circ' time series
   course <- expand.grid(cycle=1:Ncycles, id=1:sim$N, Cc=0.0, Cp=0.0
                         , Prol=NA, Tx.1=NA, Tx.2=NA, Tx.3=NA, Circ=NA
@@ -92,7 +91,7 @@ function(draw.days=NULL, Ncycles=10,
     function(id, states=NULL, Tinfusion=1.0, dose1=50){
       id <- as.integer(id)
       params <- unlist(sim$pop[id,c('Circ0','gamma','Emax','EC50','CL','Q','Vc','Vp','kTR')])
-      params['sigma'] <- 0.05
+      params['sigma'] <- 0.15
       params['duration'] <- Tinfusion
       if (is.null(states)) {
         params[c('Cc.0','Cp.0')] <- 0.0
@@ -110,7 +109,19 @@ function(draw.days=NULL, Ncycles=10,
     }
   for (id in 1:sim$N) { # outer loop over IDs permits state cycling
     params <- paramset(id)
-    recycle.state <- NULL
+    Circ0 <- unname(params['Circ0'])
+    recycle.state <- c(Cc = 0.0
+                      ,Cp = 0.0
+                      ,Prol = Circ0
+                      ,Tx.1 = Circ0
+                      ,Tx.2 = Circ0
+                      ,Tx.3 = Circ0
+                      ,Circ = Circ0
+                      ,Circ.0 = Circ0
+                      ,CircMin = Circ0
+                      ,tNadir = sim$pkpd@t0
+    )
+    
     for (cycle in 1:max(course$cycle)) {
       idx <- which(course$cycle==cycle & course$id==id)
       if (!is.null(dta)) { # Override preconfigured dose
@@ -119,8 +130,13 @@ function(draw.days=NULL, Ncycles=10,
           recycle.state <- unlist(traj[nrow(traj),statevector[1:7]]) # set components of 'real state'
       }
       params['dose'] <- course$dose[idx]
-      pkpd <- pomp(pkpd, initializer = sim$inits_fac(recycle.state))
-      traj <- trajectory(pkpd, params=params, as.data.frame=TRUE)
+      pkpd <- pomp(sim$pkpd, rinit = function(t0, ...){
+        c(recycle.state, c(Circ.0=unname(recycle.state['Circ']),
+                           CircMin=unname(recycle.state['Circ']),
+                           tNadir=t0))
+      })
+      traj <- trajectory(pkpd, params=params, format="data.frame",
+                         rtol=1e-5, atol=0.1, maxsteps=50000)
       to.add <- data.frame(id=rep(id,length(traj$time))
                            , time=traj$time + (cycle-1)*max(pkpd@times)
                            , ANC=traj$Circ)

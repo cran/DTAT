@@ -186,8 +186,6 @@ NULL
 #'   \item \code{pop}: A sample drawn from the population model.
 #'   \item \code{N}: Restricts simulation to first \code{N} subjects in
 #'     \code{pop}.
-#'   \item \code{inits_fac}: An initializer factory taking an initial state as
-#'     argument.
 #'   \item \code{params.default}: Default parameters.
 #' }
 #' 

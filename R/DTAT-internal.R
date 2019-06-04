@@ -5,7 +5,5 @@ sim$pop <- data.frame()
 sim$N <- 0
 # PK/PD simulation model
 sim$pkpd <- NA
-# Initializer factory for sim model
-sim$inits_fac <- NA
 # Default parameters
 sim$params.default <- numeric()
