@@ -1,8 +1,8 @@
 Package: DTAT
 Type: Package
 Title: Dose Titration Algorithm Tuning
-Version: 0.3-2
-Date: 2019-06-04
+Version: 0.3-3
+Date: 2019-06-24
 Authors@R: person("David C.", "Norris"
                  , role = c("aut", "cre")
                  , email = "david@precisionmethods.guru"
@@ -24,10 +24,10 @@ Description: DTAT is a methodologic framework allowing dose individualization to
 URL: https://osf.io/5479p/
 License: MIT + file LICENSE
 RoxygenNote: 6.1.1
-VignetteBuilder: knitr
+VignetteBuilder: knitr, rmarkdown
 Encoding: UTF-8
 NeedsCompilation: no
-Packaged: 2019-06-04 18:14:02 UTC; david
+Packaged: 2019-06-25 22:09:53 UTC; david
 Author: David C. Norris [aut, cre]
 Repository: CRAN
-Date/Publication: 2019-06-04 18:50:03 UTC
+Date/Publication: 2019-06-26 08:00:03 UTC

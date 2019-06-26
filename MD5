@@ -1,4 +1,4 @@
-3102df3594a8d6cba8a9644bfc65795e *DESCRIPTION
+cb6c63227ebdc226ea5c5314d4240bd6 *DESCRIPTION
 cd97ffcd04c38c889a18fec7816aae55 *LICENSE
 3b6221823101a4706b8e18d9acc25f68 *NAMESPACE
 8e64d17b18ee706cefa14aa6db71bb37 *R/AllClass.R
@@ -22,6 +22,7 @@ ac00389483fefb58035e5c8795a1ed16 *inst/doc/DTAT-package.bib
 77014647aa39995d1df18d4bb0d6a352 *inst/doc/Designing-33PC.R
 a10aa18376b1e44cc172345f96b656a6 *inst/doc/Designing-33PC.Rmd
 862cacd582ebde812fc8e70118cf8fa6 *inst/doc/Designing-33PC.html
+c83a02b92ca708fc66c3588f05ec0a04 *inst/doc/widget_D3-viz.html
 018ba2d9e63dfb838c42c9d35fcbec75 *inst/htmlwidgets/lib/data.js
 a3aa8b9ae68ccbc41797feee5b07d131 *inst/htmlwidgets/lib/ds-plot.js
 f21ac4167059b16f3bdddd19cd18cb70 *inst/htmlwidgets/lib/exx.js
