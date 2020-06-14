@@ -10,6 +10,7 @@ bibliography: DTAT-package.bib
 ---
 
 ```{r setup, include=FALSE}
+options(rmarkdown.html_vignette.check_title = FALSE) # suppress un-needed warning
 knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_chunk$set(fig.width = 5)
 # Notwithstanding the advice offered in the package:htmlwidgets docs (see link),
@@ -91,7 +92,7 @@ By inverting the customary mathematical treatment, we avoid an unnatural inversi
 
 ### Precautionary Coherence
 
-The *precautionary coherence* (PC) principle introduced in [@norris_precautionary_2017] requires that "a PC trial conducts escalation only through titration." Please see that paper or [this lay explainer](https://www.patreon.com/posts/21021190) for a fuller discussion. To appreciate the ethical content of the PC principle in an especially vivid way, you might try imagining yourself in the trialist's place in [this scenario](https://www.patreon.com/posts/21599895).
+The *precautionary coherence* (PC) principle introduced in [@norris_precautionary_2017] requires that "a PC trial conducts escalation only through titration." Please see that paper or [this lay explainer](https://precisionmethods.guru/2019/04/14/the-conduct-of-most-first-in-human-oncology-drug-trials-is-conceptually-incoherent-and-unethical/) for a fuller discussion. To appreciate the ethical content of the PC principle in an especially vivid way, you might try imagining yourself in the trialist's place in [this scenario](https://precisionmethods.guru/2019/04/16/on-the-elementary-nature-of-precautionary-coherence/).
 
 ### Dose Ranging in General
 

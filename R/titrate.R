@@ -22,7 +22,7 @@
 #' @importFrom stats time
 #' 
 #' @examples 
-#' \donttest{
+#' if(interactive()){
 #' # Reproduce Figure 5 from the F1000Research paper (run time > 10 s).
 #' # 1. Set up sim$pop & sim$pkpd by running the repro for Figures 1 & 3:
 #' example(topic="Onoue.Friberg", package="DTAT", ask=FALSE)
@@ -76,7 +76,9 @@ function(draw.days=NULL, Ncycles=10,
   anc.ts <- data.frame() # This will be used to collect an hourly 'Circ' time series
   course <- expand.grid(cycle=1:Ncycles, id=1:sim$N, Cc=0.0, Cp=0.0
                         , Prol=NA, Tx.1=NA, Tx.2=NA, Tx.3=NA, Circ=NA
-                        , dose=NA, CircMin=NA, tNadir=NA, scaled.dose=NA
+                        , dose=NA
+                        , CircMin=NA, tNadir=NA
+                        , scaled.dose=NA
   )
   for (day in draw.days) {
     newcolumn <- paste("ANC", day, sep="_d")
@@ -85,7 +87,7 @@ function(draw.days=NULL, Ncycles=10,
     label(course[,newcolumn]) <- paste("Day-",day," ANC", sep="")
   }
   course$dose <- seq(scaled, from=min(doserange), to=max(doserange), length.out=max(course$cycle), digits=0)[course$cycle]
-  statevector <- c('Cc','Cp','Prol','Tx.1','Tx.2','Tx.3','Circ','CircMin','tNadir')
+  statevector <- c('Cc','Cp','Prol','Tx.1','Tx.2','Tx.3','Circ')
   course[,statevector[-(1:2)]] <- sim$pop$Circ0[course$id] # Prol(0)=Tx.1(0)=Tx.2(0)=Tx.3(0)=Circ(0):=Circ0
   paramset <-
     function(id, states=NULL, Tinfusion=1.0, dose1=50){
@@ -95,14 +97,10 @@ function(draw.days=NULL, Ncycles=10,
       params['duration'] <- Tinfusion
       if (is.null(states)) {
         params[c('Cc.0','Cp.0')] <- 0.0
-        params['tNadir.0'] <- 0.0
       } else {
-        statenames <- c('Cc','Cp','Prol','Tx.1','Tx.2','Tx.3','Circ','dose','CircMin','tNadir')
+        statenames <- c('Cc','Cp','Prol','Tx.1','Tx.2','Tx.3','Circ','dose')
         stopifnot(setequal(names(states), statenames))
         params[paste(statenames,'0',sep='.')] <- states[statenames]
-        # The 'pseudo-states' CircMin and tNadir, however, require special treatment:
-        params['CircMin.0'] <- params['Circ.0']
-        params['tNadir.0'] <- 0.0
       }
       params['dose'] <- dose1
       unlist(params)
@@ -117,9 +115,6 @@ function(draw.days=NULL, Ncycles=10,
                       ,Tx.2 = Circ0
                       ,Tx.3 = Circ0
                       ,Circ = Circ0
-                      ,Circ.0 = Circ0
-                      ,CircMin = Circ0
-                      ,tNadir = sim$pkpd@t0
     )
     
     for (cycle in 1:max(course$cycle)) {
@@ -130,11 +125,7 @@ function(draw.days=NULL, Ncycles=10,
           recycle.state <- unlist(traj[nrow(traj),statevector[1:7]]) # set components of 'real state'
       }
       params['dose'] <- course$dose[idx]
-      pkpd <- pomp(sim$pkpd, rinit = function(t0, ...){
-        c(recycle.state, c(Circ.0=unname(recycle.state['Circ']),
-                           CircMin=unname(recycle.state['Circ']),
-                           tNadir=t0))
-      })
+      pkpd <- pomp(sim$pkpd, rinit = function(...) recycle.state)
       traj <- trajectory(pkpd, params=params, format="data.frame",
                          rtol=1e-5, atol=0.1, maxsteps=50000)
       to.add <- data.frame(id=rep(id,length(traj$time))
@@ -142,24 +133,17 @@ function(draw.days=NULL, Ncycles=10,
                            , ANC=traj$Circ)
       anc.ts <- rbind(anc.ts, to.add)
       course[idx,statevector] <- traj[which.max(traj$time),statevector]
-      # Halt if integrated CircMin > min(traj$Circ) + eps, or is substantially less
-      # if(!(course[idx,'CircMin'] < min(traj$Circ) + 0.05)){
-      #   inspect.recycle.state <<- recycle.state
-      #   inspect.course <<- course
-      #   inspect.idx <<- idx
-      #   inspect.traj <<- traj
-      #   inspect.id <<- id
-      # }
-      if (course[idx,'CircMin'] > min(traj$Circ) + 0.5) {
-        warning("In cycle ", cycle, " for id", id,
-                ", CircMin=", course[idx,'CircMin'], " >> ", min(traj$Circ), "=min(traj$Circ)")
-      }
-      if (course[idx,'CircMin'] < min(traj$Circ) - 2.5) {
-        warning("In cycle ", cycle, " for id", id,
-                ", CircMin=", course[idx,'CircMin'], " << ", min(traj$Circ), "=min(traj$Circ)")
-      }
-      #stopifnot(course[idx,'CircMin'] < min(traj$Circ) + 2.5)
-      #stopifnot(course[idx,'CircMin'] > min(traj$Circ) - 2.5)
+      # When a function y(x) is sampled around a minimum at equispaced (x-dx, x, x+dx)
+      # with corresponding values (y-dy1, y, y+dy2) such that dy1 < 0 < dy2 (i.e., with
+      # the middle value y being lowest value), then a quadratic interpolation yields
+      # estimated minimum at (x_, y_) given by:
+      #   x_ = x - dx/2 * (dy1 + dy2)/(dy2 - dy1)
+      #   y_ = y - 1/8 [(dy1 + dy2)/(dy2 - dy1)]^2.
+      nadirIdx <- which.min(traj$Circ)
+      Dy1Dy2 <- diff(traj$Circ[nadirIdx + (-1:1)])
+      SdyDdy <- sum(Dy1Dy2)/diff(Dy1Dy2)
+      course[idx,'CircMin'] <- traj$Circ[nadirIdx] - (1/8)*SdyDdy^2
+      course[idx,'tNadir'] <- traj$time[nadirIdx] - 0.5*diff(traj$time[nadirIdx+(0:1)])*SdyDdy
       for (day in draw.days) {
         day.idx <- which(traj$time==day*24)
         course[idx,paste("ANC", day, sep="_d")] <- traj[day.idx,'Circ']

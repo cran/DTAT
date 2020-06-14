@@ -5,7 +5,8 @@
 \alias{dtat1000}
 \title{Precomputed neutrophil-guided chemotherapy dose titration for 1000 simulated
 subjects.}
-\format{A data frame showing end-of-cycle state of neutrophil-guided dose
+\format{
+A data frame showing end-of-cycle state of neutrophil-guided dose
 titration for 1000 simulated subjects, across 10 cycles of chemotherapy.
 \describe{
 \item{cycle}{Cycle number 1..10}
@@ -24,7 +25,8 @@ Friberg et al. (2002) model}
 \item{tNadir}{Time (days) of neutrophil nadir}
 \item{scaled.dose}{Fourth root of dose}
 \item{time}{Time (weeks) of dose administration}
-}}
+}
+}
 \description{
 This dataset is provided to support fast reproduction of a forthcoming
 pharmacoeconomic paper that includes examination of the empirical
@@ -56,12 +58,14 @@ grid.text(expression(MTD[i] \%~\%
          , x=unit(0.5,"npc")
          , y=unit(0.75,"npc")
          )
+## A very long repro
 \donttest{
-# Demonstrate exact reproduction of this data set (the titration takes many minutes!)
+# Demonstrate close reproduction of original titration (the titration takes many minutes!)
 set.seed(2016)
+library(pomp)
 Onoue.Friberg(N=1000)
 # This titration may take an hour to run ...
-chemo <- titrate(doserange = 100,
+chemo <- titrate(doserange = c(50, 3000),
                  dta=newton.raphson(dose1 = 100,
                                     omega = 0.75,
                                     slope1 = -2.0,
@@ -74,7 +78,9 @@ dtat1k <- upData(chemo$course
                 , units = c(time="weeks")
                 , print = FALSE)
 
-stopifnot(identical(dtat1k, dtat1000))
+c10dose1k <- subset(dtat1k, cycle==10)$scaled.dose
+c10dose1000 <- subset(dtat1000, cycle==10)$scaled.dose
+stopifnot(0.999 < cor(c10dose1k, c10dose1000))
 }
 
 }
@@ -82,10 +88,10 @@ stopifnot(identical(dtat1k, dtat1000))
 \enumerate{
 \item Norris DC. Dose Titration Algorithm Tuning (DTAT) should
 supersede \sQuote{the} Maximum Tolerated Dose (MTD) in oncology dose-finding
-trials. \emph{F1000Research}. 2017;6:112. doi:10.12688/f1000research.10624.3.
+trials. \emph{F1000Research}. 2017;6:112. \doi{10.12688/f1000research.10624.3}.
 \url{https://f1000research.com/articles/6-112/v3}
 \item Norris DC. Costing \sQuote{the} MTD. \emph{bioRxiv}. August 2017:150821.
-doi:10.1101/150821.
+\doi{10.1101/150821}.
 \url{http://www.biorxiv.org/content/early/2017/08/22/150821}
 }
 }

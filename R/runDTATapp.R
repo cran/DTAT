@@ -7,7 +7,7 @@
 #' @export
 #'
 #' @examples
-#' \donttest{
+#' if(interactive()){
 #' runDTATapp("Sim33PC")
 #' runDTATapp("TheCost")
 #' }

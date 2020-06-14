@@ -77,8 +77,8 @@
 #'                  , id = ordered(id, levels=paste("id",1:sim$N,sep=""))
 #'                  , units=c(Prol="cells/mm^3", Tx.1="cells/mm^3",
 #'                            Tx.2="cells/mm^3", Tx.3="cells/mm^3",
-#'                            Circ="cells/mm^3", CircMin="cells/mm^3",
-#'                            tNadir="hours", Cc="ng/mL", Cp="ng/mL",
+#'                            Circ="cells/mm^3",
+#'                            Cc="ng/mL", Cp="ng/mL",
 #'                            time="hours"), print=FALSE)
 #' 
 #' library(tidyr)
@@ -173,12 +173,6 @@ function(N, cycle.length.days=21,
   DTx_2 = kTR * (Tx_1 - Tx_2);
   DTx_3 = kTR * (Tx_2 - Tx_3);
   DCirc = kTR * (Tx_3 - Circ);
-  // We implement nadir-finding by integrating CircMin and tNadir into the state:
-  int initialHump = CircMin == Circ_0; // Circ may overshoot Circ.0 initially
-  int dropToNadir = DCirc < 0.0 && Circ < Circ_0 && (t-tNadir) < 1.0; // falling segment Circ.0-->nadir
-  DCirc_0 = 0.0; // this pseudo-state merely remembers initial value
-  DCircMin = dropToNadir ? DCirc : 0.0;
-  DtNadir  = initialHump || dropToNadir ? 1.0 : 0.0;
 "
   pkpd.step <- "
   double c2p = Q*( Cc - Cp ); // central-to-peripheral flux
@@ -191,12 +185,7 @@ function(N, cycle.length.days=21,
   Tx_2 += dt * kTR * (Tx_1 - Tx_2);
   Tx_3 += dt * kTR * (Tx_2 - Tx_3);
   double _DCirc = kTR * (Tx_3 - Circ);
-  // We implement nadir-finding by integrating CircMin and tNadir into the state:
-  int initialHump = CircMin == Circ_0; // Circ may overshoot Circ.0 initially
-  int dropToNadir = _DCirc < 0.0 && Circ < Circ_0 && (t-tNadir) < 1.0; // falling segment Circ.0-->nadir
   Circ += dt * _DCirc;
-  CircMin += dt*( dropToNadir ? _DCirc : 0.0 );
-  tNadir  += dt*( initialHump || dropToNadir ? 1.0 : 0.0 );
 "
   #Tmax <- cycle.length.days*24 # solve for full 21 days of 3-week cycle
   #df <- data.frame(time=c(seq(0.0, 1.95, 0.05), # q3min for 2h, 
@@ -211,9 +200,6 @@ function(N, cycle.length.days=21,
                ,Tx.2 = Circ0
                ,Tx.3 = Circ0
                ,Circ = Circ0
-               ,Circ.0 = Circ0
-               ,CircMin = Circ0
-               ,tNadir = t0
     )
     state
   }
@@ -228,7 +214,7 @@ function(N, cycle.length.days=21,
                , rinit = rinit_fun
                , rprior = Csnippet(pkpd.rprior)
                , dprior = Csnippet(pkpd.dprior)
-               , statenames=c("Cc", "Cp", "Prol", "Tx.1", "Tx.2", "Tx.3", "Circ","Circ.0","CircMin","tNadir")
+               , statenames=c("Cc", "Cp", "Prol", "Tx.1", "Tx.2", "Tx.3", "Circ")
                , paramnames=c("Circ0","kTR","gamma","Emax","EC50","CL","Q","Vc","Vp"
                               ,"sigma","dose","duration"
                )

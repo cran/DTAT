@@ -4,7 +4,8 @@
 \name{de.bioRxiv.240846}
 \alias{de.bioRxiv.240846}
 \title{Simulated \sQuote{3+3/PC} dose-titration study from bioRxiv paper no. 240846}
-\format{A length-10 list of data frames, each with the following columns:
+\format{
+A length-10 list of data frames, each with the following columns:
 
 \describe{
 \item{id}{Participant identifier}
@@ -12,7 +13,8 @@
 \item{dose}{Dose level, numbered consecutively starting from 1}
 \item{dlt}{A logical indicator: did this this participant experience
 a DLT during this period?}
-}}
+}
+}
 \description{
 This is a length-10 list of data frames, summarizing the simulated trial
 from this paper, at the end of periods 1, 2, ..., 10. This structure reflects
@@ -41,7 +43,7 @@ stopifnot(trial@stop_esc == attr(de.bioRxiv.240846[[10]],'stop.esc'))
 }
 \references{
 Norris DC. Precautionary Coherence Unravels Dose Escalation
-Designs. \emph{bioRxiv}. December 2017:240846. doi:10.1101/240846.
+Designs. \emph{bioRxiv}. December 2017:240846. \doi{10.1101/240846}.
 \url{https://www.biorxiv.org/content/early/2017/12/29/240846}
 }
 \keyword{datasets}

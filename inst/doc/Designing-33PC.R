@@ -1,4 +1,5 @@
-## ----setup, include=FALSE------------------------------------------------
+## ----setup, include=FALSE-----------------------------------------------------
+options(rmarkdown.html_vignette.check_title = FALSE) # suppress un-needed warning
 knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_chunk$set(fig.width = 5)
 # Notwithstanding the advice offered in the package:htmlwidgets docs (see link),
@@ -12,7 +13,7 @@ library(r2d3)
 library(widgetframe)
 library(DTAT)
 
-## ----density, fig.cap="**A postulated distribution of MTD~i~.**"---------
+## ----density, fig.cap="**A postulated distribution of MTD~i~.**"--------------
 # You might find it easiest to think in terms of CV and median:
 CV <- 0.7    # coefficient of variation of MTDi
 MTDi50 <- 75 # median MTDi (i.e., 50th percentile)
@@ -43,7 +44,7 @@ xyplot((1-F) ~ MTDi, type = "l"
        , xlab = "Dose [mg/kg]"
        , ylab = "Fraction Tolerant")
 
-## ----discrete-doses------------------------------------------------------
+## ----discrete-doses-----------------------------------------------------------
 doses <- 25 * (200/25)^(0:6/6) # geometric sequence 25..200
 doses <- round(doses/5)*5      # round to the nearest 5 mg/kg
 names(doses) <- 1:7            # label the doses 1..7
@@ -78,9 +79,9 @@ trial <- new("DE", doses=doses,
 trial <- titration(trial, periods=10)
 viz <- plot(trial)
 
-## ----D3-viz, echo=FALSE--------------------------------------------------
+## ----D3-viz, echo=FALSE-------------------------------------------------------
 frameWidget(viz, height='350')
 
-## ----start-the-app, eval=FALSE-------------------------------------------
+## ----start-the-app, eval=FALSE------------------------------------------------
 #  runDTATapp('Sim33PC')
 

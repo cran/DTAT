@@ -5,8 +5,7 @@
 \title{Calculate a dose-survival curve from a dose titration study, adding a
 confidence band}
 \usage{
-dose.survfit(de, method = "rothman", avoid.degeneracy = TRUE,
-  conf.level = 0.8)
+dose.survfit(de, method = "rothman", avoid.degeneracy = TRUE, conf.level = 0.8)
 }
 \arguments{
 \item{de}{A dose titration experiment like the \code{data} slot of class

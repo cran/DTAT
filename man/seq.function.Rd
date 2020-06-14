@@ -4,8 +4,7 @@
 \alias{seq.function}
 \title{A seq method supporting custom-scaled plot axes.}
 \usage{
-\method{seq}{function}(scalefun, from, to, length.out, digits = NULL,
-  ...)
+\method{seq}{`function`}(scalefun, from, to, length.out, digits = NULL, ...)
 }
 \arguments{
 \item{scalefun}{A numeric function that will be invoked componentwise, and

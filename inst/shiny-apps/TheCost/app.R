@@ -30,6 +30,7 @@
 library(shiny)
 library(rms)
 library(latticeExtra)
+library(RColorBrewer)
 library(invgamma)
 library(zipfR)
 

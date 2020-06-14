@@ -5,9 +5,13 @@
 \title{POMP PK/PD model for docetaxel, combining Onoue et al (2016) with Friberg et
 al (2002)}
 \usage{
-Onoue.Friberg(N, cycle.length.days = 21, data = data.frame(time =
-  c(seq(0, 1.95, 0.05), seq(2, cycle.length.days * 24, 1)), y = NA),
-  delta.t = 0.1)
+Onoue.Friberg(
+  N,
+  cycle.length.days = 21,
+  data = data.frame(time = c(seq(0, 1.95, 0.05), seq(2, cycle.length.days * 24, 1)), y
+    = NA),
+  delta.t = 0.1
+)
 }
 \arguments{
 \item{N}{Size of simulated population.}
@@ -72,8 +76,8 @@ allout <- upData(allout
                  , id = ordered(id, levels=paste("id",1:sim$N,sep=""))
                  , units=c(Prol="cells/mm^3", Tx.1="cells/mm^3",
                            Tx.2="cells/mm^3", Tx.3="cells/mm^3",
-                           Circ="cells/mm^3", CircMin="cells/mm^3",
-                           tNadir="hours", Cc="ng/mL", Cp="ng/mL",
+                           Circ="cells/mm^3",
+                           Cc="ng/mL", Cp="ng/mL",
                            time="hours"), print=FALSE)
 
 library(tidyr)

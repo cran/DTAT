@@ -16,7 +16,7 @@ Invoked for side effect. Runs the named Shiny app.
 Run Shiny apps included in package DTAT
 }
 \examples{
-\donttest{
+if(interactive()){
 runDTATapp("Sim33PC")
 runDTATapp("TheCost")
 }

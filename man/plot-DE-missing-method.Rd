@@ -5,7 +5,7 @@
 \alias{plot,DE,missing-method}
 \title{Plot a DE object as an interactive htmlwidget}
 \usage{
-\S4method{plot}{DE,missing}(x, y, ...)
+\S4method{plot}{DE,missing}(x, y, ..., devtree = FALSE)
 }
 \arguments{
 \item{x}{An object of class \code{DE}}
@@ -14,6 +14,8 @@
 
 \item{...}{Passed to \code{\link[r2d3]{r2d3}}, enabling caller to (e.g.) the
 override the default \code{viewer = "internal"}.}
+
+\item{devtree}{Logical indicator used to select local package dir}
 }
 \description{
 Plot a DE object as an interactive htmlwidget

@@ -21,7 +21,7 @@
 #' indicating when escalation stopped during the simulated trial.
 #' 
 #' @references Norris DC. Precautionary Coherence Unravels Dose Escalation
-#' Designs. \emph{bioRxiv}. December 2017:240846. doi:10.1101/240846.
+#' Designs. \emph{bioRxiv}. December 2017:240846. \doi{10.1101/240846}.
 #' \url{https://www.biorxiv.org/content/early/2017/12/29/240846}
 #' @keywords datasets
 #' @examples
@@ -48,6 +48,14 @@ NULL
 #' @name DTAT-package
 #' @title Dose Titration Algorithm Tuning: a Framework for Dose Individualization
 #'  in Drug Development
+#' @description Dose Titration Algorithm Tuning (DTAT) is a methodologic framework
+#' allowing dose individualization to be conceived as a continuous learning process
+#' that begins in early-phase clinical trials and continues throughout drug development,
+#' on into clinical practice.
+#' This package includes code that researchers may use to reproduce or extend key results
+#' of the DTAT research programme, plus tools for trialists to design and simulate a
+#' '3+3/PC' dose-finding study. Please see Norris (2017) \doi{10.12688/f1000research.10624.3}
+#' and Norris (2017) \doi{10.1101/240846}.
 #' @aliases DTAT-package DTAT
 #' @docType package
 #' @author David C. Norris
@@ -55,27 +63,27 @@ NULL
 #' @references
 #' 1. Norris DC. Dose Titration Algorithm Tuning (DTAT) should supersede
 #'    \sQuote{the} Maximum Tolerated Dose (MTD) in oncology dose-finding trials.
-#'    \emph{F1000Research}. 2017;6:112. doi:10.12688/f1000research.10624.3.
+#'    \emph{F1000Research}. 2017;6:112. \doi{10.12688/f1000research.10624.3}.
 #'    \url{https://f1000research.com/articles/6-112/v3}
 #' 
 #' 2. Norris DC. Costing \sQuote{the} MTD. \emph{bioRxiv}. August 2017:150821.
-#'    doi:10.1101/150821.
+#'    \doi{10.1101/150821}.
 #'    \url{http://www.biorxiv.org/content/early/2017/08/22/150821}
 #' 
 #' 3. Norris DC. Precautionary Coherence Unravels Dose Escalation Designs.
-#'    \emph{bioRxiv}. December 2017:240846. doi:10.1101/240846.
+#'    \emph{bioRxiv}. December 2017:240846. \doi{10.1101/240846}.
 #'    \url{https://www.biorxiv.org/content/early/2017/12/29/240846}
 #' 
 #' 4. Norris DC. One-size-fits-all dosing in oncology wastes money, innovation
 #'    and lives. \emph{Drug Discov Today}. 2018;23(1):4-6.
-#'    doi:10.1016/j.drudis.2017.11.008.
+#'    \doi{10.1016/j.drudis.2017.11.008}.
 #'    \url{https://www.sciencedirect.com/science/article/pii/S1359644617303586}
 #' 
 #' 5. Norris DC. Costing \sQuote{the} MTD ... in 2-D. \emph{bioRxiv}. July 2018:370817.
-#'    doi:10.1101/370817.
+#'    \doi{10.1101/370817}.
 #'    \url{https://www.biorxiv.org/content/early/2018/07/17/370817}
 #' 
-#' @importFrom pomp pomp euler.sim rprior trajectory Csnippet
+#' @importFrom pomp pomp rprior trajectory Csnippet
 #' @import survival
 #' @import methods
 NULL
@@ -119,11 +127,11 @@ NULL
 #' }
 #' @references 1. Norris DC. Dose Titration Algorithm Tuning (DTAT) should
 #' supersede \sQuote{the} Maximum Tolerated Dose (MTD) in oncology dose-finding
-#' trials. \emph{F1000Research}. 2017;6:112. doi:10.12688/f1000research.10624.3.
+#' trials. \emph{F1000Research}. 2017;6:112. \doi{10.12688/f1000research.10624.3}.
 #' \url{https://f1000research.com/articles/6-112/v3}
 #' 
 #' 2. Norris DC. Costing \sQuote{the} MTD. \emph{bioRxiv}. August 2017:150821.
-#' doi:10.1101/150821.
+#' \doi{10.1101/150821}.
 #' \url{http://www.biorxiv.org/content/early/2017/08/22/150821}
 #' @keywords datasets
 #' @examples
@@ -147,12 +155,14 @@ NULL
 #'          , x=unit(0.5,"npc")
 #'          , y=unit(0.75,"npc")
 #'          )
+#' ## A very long repro
 #' \donttest{
-#' # Demonstrate exact reproduction of this data set (the titration takes many minutes!)
+#' # Demonstrate close reproduction of original titration (the titration takes many minutes!)
 #' set.seed(2016)
+#' library(pomp)
 #' Onoue.Friberg(N=1000)
 #' # This titration may take an hour to run ...
-#' chemo <- titrate(doserange = 100,
+#' chemo <- titrate(doserange = c(50, 3000),
 #'                  dta=newton.raphson(dose1 = 100,
 #'                                     omega = 0.75,
 #'                                     slope1 = -2.0,
@@ -165,7 +175,9 @@ NULL
 #'                 , units = c(time="weeks")
 #'                 , print = FALSE)
 #' 
-#' stopifnot(identical(dtat1k, dtat1000))
+#' c10dose1k <- subset(dtat1k, cycle==10)$scaled.dose
+#' c10dose1000 <- subset(dtat1000, cycle==10)$scaled.dose
+#' stopifnot(0.999 < cor(c10dose1k, c10dose1000))
 #' }
 #' 
 NULL

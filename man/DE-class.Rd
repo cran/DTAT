@@ -16,7 +16,7 @@ trial.}
 \item{\code{units}}{A string indicating dose units, e.g. \code{"mg/kg"}.}
 
 \item{\code{MTDi}}{A numeric vector of optimal doses for simulated study
-participants. Optionally a call to an \code{r<distribution>(...)} function which
+participants. Optionally a call to an \verb{r<distribution>(...)} function which
 may be parsed to calculate the \code{mtd_quantiles} slot.}
 
 \item{\code{mtd_quantiles}}{A numeric vector of quantiles of the distribution from

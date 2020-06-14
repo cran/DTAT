@@ -4,8 +4,7 @@
 \alias{titrate}
 \title{Perform neutrophil-guided dose titration of a chemotherapy drug.}
 \usage{
-titrate(draw.days = NULL, Ncycles = 10, doserange = c(50, 500),
-  dta = NULL)
+titrate(draw.days = NULL, Ncycles = 10, doserange = c(50, 500), dta = NULL)
 }
 \arguments{
 \item{draw.days}{Integer days on which ANC is to be measured}
@@ -29,7 +28,7 @@ paper (referenced below), using a clearer and more general software design
 than is found in the online code supplement available at https://osf.io/vwnqz/.
 }
 \examples{
-\donttest{
+if(interactive()){
 # Reproduce Figure 5 from the F1000Research paper (run time > 10 s).
 # 1. Set up sim$pop & sim$pkpd by running the repro for Figures 1 & 3:
 example(topic="Onoue.Friberg", package="DTAT", ask=FALSE)

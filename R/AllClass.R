@@ -304,18 +304,29 @@ setMethod("as_d3_data", "DE",
 #' @param y Unused; included for S4 generic consistency
 #' @param ... Passed to \code{\link[r2d3]{r2d3}}, enabling caller to (e.g.) the
 #'   override the default \code{viewer = "internal"}.
+#' @param devtree Logical indicator used to select local package dir
 #'
 #' @docType methods
 #' @importFrom r2d3 r2d3
 #' @export
 setMethod("plot", c("DE","missing"),
-    function(x, y, ...){
+    function(x, y, ..., devtree=FALSE){
+      script <- "htmlwidgets/lib/main.js"
+      dependencies <- file.path("htmlwidgets/lib",
+                                c("margins.js", "exx.js",
+                                  "ox-plot.js", "ds-plot.js",
+                                  "swim-plot.js", "th-plot.js"))
+      if (devtree) { # refer to local package under development
+        script <- file.path("DTAT/inst", script)
+        dependencies <- file.path("DTAT/inst", dependencies)
+        message("script = ", script)
+      } else { # refer to installed package
+        script <- system.file(script, package="DTAT")
+        dependencies <- system.file(dependencies, package="DTAT")
+      }
       r2d3::r2d3(data=as_d3_data(x),
-                 script=system.file("htmlwidgets/lib/main.js", package="DTAT"),
+                 script = script,
                  d3_version = 4, container = "div",
-                 dependencies = system.file(paste("htmlwidgets/lib",
-                                                  c("margins.js", "exx.js",
-                                                    "ox-plot.js", "ds-plot.js"),
-                                                  sep="/"), package="DTAT"),
+                 dependencies = dependencies,
                  ...)
     })
