@@ -44,6 +44,6 @@ stopifnot(trial@stop_esc == attr(de.bioRxiv.240846[[10]],'stop.esc'))
 \references{
 Norris DC. Precautionary Coherence Unravels Dose Escalation
 Designs. \emph{bioRxiv}. December 2017:240846. \doi{10.1101/240846}.
-\url{https://www.biorxiv.org/content/early/2017/12/29/240846}
+\url{https://www.biorxiv.org/content/10.1101/240846v1}
 }
 \keyword{datasets}

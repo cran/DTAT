@@ -8,8 +8,8 @@ al (2002)}
 Onoue.Friberg(
   N,
   cycle.length.days = 21,
-  data = data.frame(time = c(seq(0, 1.95, 0.05), seq(2, cycle.length.days * 24, 1)), y
-    = NA),
+  data = data.frame(time = c(seq(0, 1.95, 0.05), seq(2, cycle.length.days * 24, 1)), y =
+    NA),
   delta.t = 0.1
 )
 }

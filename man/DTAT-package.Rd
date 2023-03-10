@@ -13,8 +13,8 @@ that begins in early-phase clinical trials and continues throughout drug develop
 on into clinical practice.
 This package includes code that researchers may use to reproduce or extend key results
 of the DTAT research programme, plus tools for trialists to design and simulate a
-'3+3/PC' dose-finding study. Please see Norris (2017) \doi{10.12688/f1000research.10624.3}
-and Norris (2017) \doi{10.1101/240846}.
+'3+3/PC' dose-finding study. Please see Norris (2017a) \doi{10.12688/f1000research.10624.3}
+and Norris (2017c) \doi{10.1101/240846}.
 }
 \references{
 \enumerate{
@@ -24,17 +24,17 @@ and Norris (2017) \doi{10.1101/240846}.
 \url{https://f1000research.com/articles/6-112/v3}
 \item Norris DC. Costing \sQuote{the} MTD. \emph{bioRxiv}. August 2017:150821.
 \doi{10.1101/150821}.
-\url{http://www.biorxiv.org/content/early/2017/08/22/150821}
+\url{https://www.biorxiv.org/content/10.1101/150821v3}
 \item Norris DC. Precautionary Coherence Unravels Dose Escalation Designs.
 \emph{bioRxiv}. December 2017:240846. \doi{10.1101/240846}.
-\url{https://www.biorxiv.org/content/early/2017/12/29/240846}
+\url{https://www.biorxiv.org/content/10.1101/240846v1}
 \item Norris DC. One-size-fits-all dosing in oncology wastes money, innovation
 and lives. \emph{Drug Discov Today}. 2018;23(1):4-6.
 \doi{10.1016/j.drudis.2017.11.008}.
 \url{https://www.sciencedirect.com/science/article/pii/S1359644617303586}
 \item Norris DC. Costing \sQuote{the} MTD ... in 2-D. \emph{bioRxiv}. July 2018:370817.
 \doi{10.1101/370817}.
-\url{https://www.biorxiv.org/content/early/2018/07/17/370817}
+\url{https://www.biorxiv.org/content/10.1101/370817v1}
 }
 }
 \author{

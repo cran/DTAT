@@ -1,15 +1,15 @@
 #' Simulated \sQuote{3+3/PC} dose-titration study from bioRxiv paper no. 240846
-#' 
+#'
 #' This is a length-10 list of data frames, summarizing the simulated trial
 #' from this paper, at the end of periods 1, 2, ..., 10. This structure reflects
 #' an awkward S3 implementation that package DTAT v0.3 reimplemented using S4.
 #' This data set is retained to support regression tests.
-#' 
-#' 
+#'
+#'
 #' @name de.bioRxiv.240846
 #' @docType data
 #' @format A length-10 list of data frames, each with the following columns:
-#' 
+#'
 #' \describe{
 #'   \item{id}{Participant identifier}
 #'   \item{period}{DLT assessment period, numbered consecutively from 1}
@@ -19,13 +19,13 @@
 #' }
 #' @details A \code{stop.esc} attribute is attached to data frames in this list,
 #' indicating when escalation stopped during the simulated trial.
-#' 
+#'
 #' @references Norris DC. Precautionary Coherence Unravels Dose Escalation
 #' Designs. \emph{bioRxiv}. December 2017:240846. \doi{10.1101/240846}.
-#' \url{https://www.biorxiv.org/content/early/2017/12/29/240846}
+#' \url{https://www.biorxiv.org/content/10.1101/240846v1}
 #' @keywords datasets
 #' @examples
-#' 
+#'
 #' data(de.bioRxiv.240846)
 #' # Demonstrate that the new S4 3+3/PC implementation reproduces the
 #' # simulated trial from the paper:
@@ -38,7 +38,7 @@
 #' trial <- titration(trial, periods=10)
 #' stopifnot(all(trial@data == de.bioRxiv.240846[[10]]))
 #' stopifnot(trial@stop_esc == attr(de.bioRxiv.240846[[10]],'stop.esc'))
-#' 
+#'
 NULL
 
 
@@ -54,35 +54,35 @@ NULL
 #' on into clinical practice.
 #' This package includes code that researchers may use to reproduce or extend key results
 #' of the DTAT research programme, plus tools for trialists to design and simulate a
-#' '3+3/PC' dose-finding study. Please see Norris (2017) \doi{10.12688/f1000research.10624.3}
-#' and Norris (2017) \doi{10.1101/240846}.
+#' '3+3/PC' dose-finding study. Please see Norris (2017a) \doi{10.12688/f1000research.10624.3}
+#' and Norris (2017c) \doi{10.1101/240846}.
 #' @aliases DTAT-package DTAT
 #' @docType package
 #' @author David C. Norris
-#' 
+#'
 #' @references
 #' 1. Norris DC. Dose Titration Algorithm Tuning (DTAT) should supersede
 #'    \sQuote{the} Maximum Tolerated Dose (MTD) in oncology dose-finding trials.
 #'    \emph{F1000Research}. 2017;6:112. \doi{10.12688/f1000research.10624.3}.
 #'    \url{https://f1000research.com/articles/6-112/v3}
-#' 
+#'
 #' 2. Norris DC. Costing \sQuote{the} MTD. \emph{bioRxiv}. August 2017:150821.
 #'    \doi{10.1101/150821}.
-#'    \url{http://www.biorxiv.org/content/early/2017/08/22/150821}
-#' 
+#'    \url{https://www.biorxiv.org/content/10.1101/150821v3}
+#'
 #' 3. Norris DC. Precautionary Coherence Unravels Dose Escalation Designs.
 #'    \emph{bioRxiv}. December 2017:240846. \doi{10.1101/240846}.
-#'    \url{https://www.biorxiv.org/content/early/2017/12/29/240846}
-#' 
+#'    \url{https://www.biorxiv.org/content/10.1101/240846v1}
+#'
 #' 4. Norris DC. One-size-fits-all dosing in oncology wastes money, innovation
 #'    and lives. \emph{Drug Discov Today}. 2018;23(1):4-6.
 #'    \doi{10.1016/j.drudis.2017.11.008}.
 #'    \url{https://www.sciencedirect.com/science/article/pii/S1359644617303586}
-#' 
+#'
 #' 5. Norris DC. Costing \sQuote{the} MTD ... in 2-D. \emph{bioRxiv}. July 2018:370817.
 #'    \doi{10.1101/370817}.
-#'    \url{https://www.biorxiv.org/content/early/2018/07/17/370817}
-#' 
+#'    \url{https://www.biorxiv.org/content/10.1101/370817v1}
+#'
 #' @importFrom pomp pomp rprior trajectory Csnippet
 #' @import survival
 #' @import methods
@@ -94,15 +94,15 @@ NULL
 
 #' Precomputed neutrophil-guided chemotherapy dose titration for 1000 simulated
 #' subjects.
-#' 
+#'
 #' This dataset is provided to support fast reproduction of a forthcoming
 #' pharmacoeconomic paper that includes examination of the empirical
 #' distribution of MTDi in N=1000 simulated subjects.
-#' 
+#'
 #' Running the examples interactively, you can verify the reproducibility of
 #' this dataset. (That demo is included in a \code{donttest} block to spare the
 #' CRAN servers.)
-#' 
+#'
 #' @name dtat1000
 #' @docType data
 #' @format A data frame showing end-of-cycle state of neutrophil-guided dose
@@ -129,19 +129,20 @@ NULL
 #' supersede \sQuote{the} Maximum Tolerated Dose (MTD) in oncology dose-finding
 #' trials. \emph{F1000Research}. 2017;6:112. \doi{10.12688/f1000research.10624.3}.
 #' \url{https://f1000research.com/articles/6-112/v3}
-#' 
+#'
 #' 2. Norris DC. Costing \sQuote{the} MTD. \emph{bioRxiv}. August 2017:150821.
 #' \doi{10.1101/150821}.
-#' \url{http://www.biorxiv.org/content/early/2017/08/22/150821}
+#' \url{https://www.biorxiv.org/content/10.1101/150821v3}
 #' @keywords datasets
 #' @examples
-#' 
+#'
 #' data(dtat1000)
 #' # 1. Extract the N final doses, assuming convergence by the tenth course
 #' MTD_i <- with(dtat1000, dose[time==27])
 #' MTD_i <- MTD_i[MTD_i < 5000] # Exclude few outliers
 #' # 2. Do a kernel density plot
 #' library(Hmisc)
+#' library(latticeExtra)
 #' hist <- histogram(~MTD_i, breaks=c(0,100,200,300,400,600,900,1500,2500,4000,5000)
 #'                   , xlab=expression(MTD[i]))
 #' approx <- data.frame(mtd_i=seq(0, 5000, 10))
@@ -155,7 +156,9 @@ NULL
 #'          , x=unit(0.5,"npc")
 #'          , y=unit(0.75,"npc")
 #'          )
-#' ## A very long repro
+#' ## A very long repro, which a user of this package may well wish to verify
+#' ## by running the examples interactively, although it takes many minutes
+#' ## to compute.  (Enclosed in a dontest block to avoid overburdening CRAN.)
 #' \donttest{
 #' # Demonstrate close reproduction of original titration (the titration takes many minutes!)
 #' set.seed(2016)
@@ -168,18 +171,18 @@ NULL
 #'                                     slope1 = -2.0,
 #'                                     slopeU = -0.2)
 #' )
-#' 
+#'
 #' dtat1k <- upData(chemo$course
 #'                 , time = 3*(cycle-1)
 #'                 , labels = c(time="Time")
 #'                 , units = c(time="weeks")
 #'                 , print = FALSE)
-#' 
+#'
 #' c10dose1k <- subset(dtat1k, cycle==10)$scaled.dose
 #' c10dose1000 <- subset(dtat1000, cycle==10)$scaled.dose
 #' stopifnot(0.999 < cor(c10dose1k, c10dose1000))
 #' }
-#' 
+#'
 NULL
 
 
@@ -187,11 +190,11 @@ NULL
 
 
 #' Environment for simulation global variables.
-#' 
+#'
 #' To simplify the code of package DTAT, as well as client tasks, this exported
 #' environment contains a handful of global variables useful for the
 #' simulations.
-#' 
+#'
 #' Global variables maintained within environment \code{sim} are:
 #' \enumerate{
 #'   \item \code{pkpd}: The population PK/PD model to be simulated.
@@ -200,13 +203,13 @@ NULL
 #'     \code{pop}.
 #'   \item \code{params.default}: Default parameters.
 #' }
-#' 
+#'
 #' @export
 #' @name sim
 #' @docType data
 #' @keywords datasets
 #' @examples
-#' 
+#'
 #' # Even when nrow(pop) is large, one may easily restrict
 #' # time-consuming simulations to pop[1:N,], as follows:
 #' sim$N <- 25
@@ -214,7 +217,7 @@ NULL
 #' \dontrun{
 #' titrate(...)
 #' }
-#' 
+#'
 NULL
 
 

@@ -210,10 +210,10 @@ setMethod("step_time", "DE",
 #'   Should be a positive integer.
 #' @param ... May be used to pass \code{verbatim = 'TRUE'} to internal
 #'   \code{step_time} method.
-#'   
+#'
 #' @references Norris DC. Precautionary Coherence Unravels Dose Escalation Designs.
 #'    \emph{bioRxiv}. December 2017:240846. doi:10.1101/240846.
-#'    \url{https://www.biorxiv.org/content/early/2017/12/29/240846}
+#'    \url{https://www.biorxiv.org/content/10.1101/240846v1}
 #'
 #' @export
 setGeneric("titration", def=function(x, periods, ...) NULL)

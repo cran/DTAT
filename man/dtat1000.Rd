@@ -45,6 +45,7 @@ MTD_i <- with(dtat1000, dose[time==27])
 MTD_i <- MTD_i[MTD_i < 5000] # Exclude few outliers
 # 2. Do a kernel density plot
 library(Hmisc)
+library(latticeExtra)
 hist <- histogram(~MTD_i, breaks=c(0,100,200,300,400,600,900,1500,2500,4000,5000)
                   , xlab=expression(MTD[i]))
 approx <- data.frame(mtd_i=seq(0, 5000, 10))
@@ -58,7 +59,9 @@ grid.text(expression(MTD[i] \%~\%
          , x=unit(0.5,"npc")
          , y=unit(0.75,"npc")
          )
-## A very long repro
+## A very long repro, which a user of this package may well wish to verify
+## by running the examples interactively, although it takes many minutes
+## to compute.  (Enclosed in a dontest block to avoid overburdening CRAN.)
 \donttest{
 # Demonstrate close reproduction of original titration (the titration takes many minutes!)
 set.seed(2016)
@@ -92,7 +95,7 @@ trials. \emph{F1000Research}. 2017;6:112. \doi{10.12688/f1000research.10624.3}.
 \url{https://f1000research.com/articles/6-112/v3}
 \item Norris DC. Costing \sQuote{the} MTD. \emph{bioRxiv}. August 2017:150821.
 \doi{10.1101/150821}.
-\url{http://www.biorxiv.org/content/early/2017/08/22/150821}
+\url{https://www.biorxiv.org/content/10.1101/150821v3}
 }
 }
 \keyword{datasets}

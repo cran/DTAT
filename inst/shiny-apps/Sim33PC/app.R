@@ -2,7 +2,7 @@
 # This is a Shiny web application intended to demonstrate the concepts of:
 #   Norris DC. Precautionary Coherence Unravels Dose Escalation Designs.
 #     bioRxiv. December 2017:240846. doi:10.1101/240846
-#     https://www.biorxiv.org/content/early/2017/12/29/240846
+#     https://www.biorxiv.org/content/10.1101/240846v1
 #
 # TODO:
 # 1. Arrange the inputs in a row beneath the D3 app:
@@ -45,9 +45,9 @@ forty[c(32:35,37:39)] <- c(6.0, 6.3, 6.7, 7.0, 8.0, 8.4, 8.9)
 decadence <- c(forty/10, forty, forty*10, forty*100, 1000)
 
 ui <- fluidPage(
-   
+
    d3Output("d3"),
-   
+
    hr(),
 
    fluidRow(
@@ -105,14 +105,14 @@ ui <- fluidPage(
       tags$p(tags$b("See:"),
              "Norris DC. Precautionary Coherence Unravels Dose Escalation Designs",
              tags$i("bioRxiv"), "December 2017:240846.",
-             tags$a(href="https://www.biorxiv.org/content/early/2017/12/29/240846",
+             tags$a(href="https://www.biorxiv.org/content/10.1101/240846v1",
                     "doi:10.1101/240846.")
              )
    )
 )
 
 server <- function(input, output) {
-   
+
    output$d3 <- renderD3({
       CV <- as.numeric(input$CV)/100
       shape <- CV^-2
@@ -139,6 +139,6 @@ server <- function(input, output) {
    })
 }
 
-# Run the application 
+# Run the application
 shinyApp(ui = ui, server = server)
 

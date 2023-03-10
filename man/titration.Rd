@@ -25,5 +25,5 @@ Simulate a \sQuote{3+3/PC} dose-titration trial
 \references{
 Norris DC. Precautionary Coherence Unravels Dose Escalation Designs.
 \emph{bioRxiv}. December 2017:240846. doi:10.1101/240846.
-\url{https://www.biorxiv.org/content/early/2017/12/29/240846}
+\url{https://www.biorxiv.org/content/10.1101/240846v1}
 }

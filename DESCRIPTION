@@ -1,8 +1,8 @@
 Package: DTAT
 Type: Package
 Title: Dose Titration Algorithm Tuning
-Version: 0.3-4
-Date: 2020-06-07
+Version: 0.3-5
+Date: 2023-03-09
 Authors@R: person("David C.", "Norris"
                  , role = c("aut", "cre")
                  , email = "david@precisionmethods.guru"
@@ -20,15 +20,15 @@ Description: Dose Titration Algorithm Tuning (DTAT) is a methodologic framework
              This package includes code that researchers may use to reproduce
              or extend key results of the DTAT research programme, plus tools
              for trialists to design and simulate a '3+3/PC' dose-finding study.
-             Please see Norris (2017) <doi:10.12688/f1000research.10624.3> and
-             Norris (2017) <doi:10.1101/240846>.
+             Please see Norris (2017a) <doi:10.12688/f1000research.10624.3> and
+             Norris (2017c) <doi:10.1101/240846>.
 URL: https://precisionmethods.guru/
 License: MIT + file LICENSE
-RoxygenNote: 7.1.0
+RoxygenNote: 7.2.3
 VignetteBuilder: knitr, rmarkdown
 Encoding: UTF-8
 NeedsCompilation: no
 Author: David C. Norris [aut, cre]
-Packaged: 2020-06-08 13:34:38 UTC; david
+Packaged: 2023-03-09 15:06:43 UTC; david
 Repository: CRAN
-Date/Publication: 2020-06-14 14:50:19 UTC
+Date/Publication: 2023-03-10 22:40:14 UTC
