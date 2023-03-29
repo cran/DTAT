@@ -1,18 +1,18 @@
 Package: DTAT
 Type: Package
 Title: Dose Titration Algorithm Tuning
-Version: 0.3-5
-Date: 2023-03-09
+Version: 0.3-6
+Date: 2023-03-29
 Authors@R: person("David C.", "Norris"
                  , role = c("aut", "cre")
                  , email = "david@precisionmethods.guru"
                  )
 Maintainer: David C. Norris <david@precisionmethods.guru>
-Depends: R (>= 3.4.0), survival
+Depends: R (>= 3.5.0), survival
 Imports: km.ci, pomp, Hmisc, data.table, dplyr, r2d3, shiny, jsonlite,
         methods
 Suggests: knitr, rmarkdown, lattice, latticeExtra, widgetframe, tidyr,
-        RColorBrewer
+        RColorBrewer, invgamma, zipfR, rms
 Description: Dose Titration Algorithm Tuning (DTAT) is a methodologic framework
              allowing dose individualization to be conceived as a continuous
              learning process that begins in early-phase clinical trials and
@@ -29,6 +29,6 @@ VignetteBuilder: knitr, rmarkdown
 Encoding: UTF-8
 NeedsCompilation: no
 Author: David C. Norris [aut, cre]
-Packaged: 2023-03-09 15:06:43 UTC; david
+Packaged: 2023-03-29 19:09:10 UTC; david
 Repository: CRAN
-Date/Publication: 2023-03-10 22:40:14 UTC
+Date/Publication: 2023-03-29 19:40:02 UTC

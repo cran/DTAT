@@ -1,4 +1,4 @@
-03de2afea27cd710c860e2161f6b2e06 *DESCRIPTION
+34fcb0d01b9e9fe86a21eba2d5dbd017 *DESCRIPTION
 5fbeab22a34ef4f9ad9da15b45e38ba3 *LICENSE
 c938e605a768cdddc6a95fe6cf5cdce5 *NAMESPACE
 939331b9ebdb1237bea817d32a3599d3 *R/AllClass.R
@@ -13,9 +13,9 @@ ba924c75b56bddfe66e0e595107e0a27 *R/reexports.R
 1e4f10a0f52f272502195431e17e2350 *R/runDTATapp.R
 f3f251c60fcec77a866dafd22f38b28e *R/scaled.R
 df68cee660a03b12472d1b0cf7a5c3bb *R/seq.function.R
-d4896328854b91018248a9e979ee2d8a *R/titrate.R
-439bf689fa27cf9affd0335332142165 *build/partial.rdb
-b611e4a86a24fa3905e391695dde3e1e *build/vignette.rds
+27092c49725c151a85f37857ada39343 *R/titrate.R
+f61db891eb928123aba4412ca322f508 *build/partial.rdb
+c3350dd913ef6f1f04ab1ac51297a608 *build/vignette.rds
 0c8962e17792926c72b3bbdb78cd0c75 *data/de.bioRxiv.240846.rda
 0fbdac4d749ccdb7d44acc37bd7c234f *data/dtat1000.rda
 e8017f7d16ee8ff9d6a4149d3f0563ba *inst/CITATION
@@ -23,6 +23,10 @@ e8017f7d16ee8ff9d6a4149d3f0563ba *inst/CITATION
 b722ce4fd111c67494b4cdeb77a814d5 *inst/doc/Designing-33PC.R
 3903753419545f95e7874c8e4f856693 *inst/doc/Designing-33PC.Rmd
 7d90f9809ca9dd1f1f65ece832c0999d *inst/doc/Designing-33PC.html
+a2cfd55ab8c42871581c1bfcad4f42d8 *inst/doc/dtat.R
+8f4c5bcc58da8e9bf6458ce65a0c650c *inst/doc/dtat.Rmd
+5be7b4b405d6d5bb4d54eead5b6b0cb8 *inst/doc/dtat.pdf
+dc529defd50c080722ce07e733dfc564 *inst/doc/widget_D3-viz.html
 018ba2d9e63dfb838c42c9d35fcbec75 *inst/htmlwidgets/lib/data.js
 a3aa8b9ae68ccbc41797feee5b07d131 *inst/htmlwidgets/lib/ds-plot.js
 f21ac4167059b16f3bdddd19cd18cb70 *inst/htmlwidgets/lib/exx.js
@@ -56,3 +60,4 @@ a96d426ce8c1ef34a503f375f63f75f5 *man/reexports.Rd
 5786ec8cb38cbf02f984db87f2c37ece *man/titration.Rd
 642691ef2da35c91f0cc3968452c6b8a *vignettes/DTAT-package.bib
 3903753419545f95e7874c8e4f856693 *vignettes/Designing-33PC.Rmd
+8f4c5bcc58da8e9bf6458ce65a0c650c *vignettes/dtat.Rmd

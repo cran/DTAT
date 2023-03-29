@@ -1,10 +1,10 @@
 #' Perform neutrophil-guided dose titration of a chemotherapy drug.
-#' 
+#'
 #' This is included in package DTAT mainly for archival purposes, with the aim
 #' to document a reproduction of Figure 5 from the 2017 \emph{F1000Research}
 #' paper (referenced below), using a clearer and more general software design
 #' than is found in the online code supplement available at https://osf.io/vwnqz/.
-#' 
+#'
 #' @param draw.days Integer days on which ANC is to be measured
 #' @param Ncycles Number of chemo cycles through which to simulate titration
 #' @param doserange Range of doses to consider
@@ -20,8 +20,8 @@
 #' @author David C. Norris
 #' @importFrom Hmisc label<- upData
 #' @importFrom stats time
-#' 
-#' @examples 
+#'
+#' @examples
 #' if(interactive()){
 #' # Reproduce Figure 5 from the F1000Research paper (run time > 10 s).
 #' # 1. Set up sim$pop & sim$pkpd by running the repro for Figures 1 & 3:
@@ -65,7 +65,7 @@
 #'        , par.settings = simpleTheme(col=brewer.pal(4,"PRGn")[c(4,1)])
 #' )
 #' }
-#' 
+#'
 #' @export
 titrate <-
 function(draw.days=NULL, Ncycles=10,
@@ -116,7 +116,7 @@ function(draw.days=NULL, Ncycles=10,
                       ,Tx.3 = Circ0
                       ,Circ = Circ0
     )
-    
+
     for (cycle in 1:max(course$cycle)) {
       idx <- which(course$cycle==cycle & course$id==id)
       if (!is.null(dta)) { # Override preconfigured dose
@@ -126,8 +126,7 @@ function(draw.days=NULL, Ncycles=10,
       }
       params['dose'] <- course$dose[idx]
       pkpd <- pomp(sim$pkpd, rinit = function(...) recycle.state)
-      traj <- trajectory(pkpd, params=params, format="data.frame",
-                         rtol=1e-5, atol=0.1, maxsteps=50000)
+      traj <- trajectory(pkpd, params=params, format="data.frame")
       to.add <- data.frame(id=rep(id,length(traj$time))
                            , time=traj$time + (cycle-1)*max(pkpd@times)
                            , ANC=traj$Circ)
@@ -150,7 +149,7 @@ function(draw.days=NULL, Ncycles=10,
       }
     }
   }
-  
+
   course$id <- ordered(paste("id",course$id,sep=""), levels=paste("id",1:sim$N,sep=""))
   course$tNadir <- course$tNadir/24
   course$scaled.dose <- scaled(course$dose)
@@ -165,7 +164,7 @@ function(draw.days=NULL, Ncycles=10,
                              ,scaled.dose="mg")
                    , print=FALSE
   )
-  
+
   anc.ts <- upData(anc.ts
                    , id = ordered(paste("id",id,sep="")
                                   ,levels=paste("id",1:sim$N,sep=""))
@@ -175,6 +174,6 @@ function(draw.days=NULL, Ncycles=10,
                              ,time="weeks")
                    , print=FALSE
   )
-  
+
   list(course=course, anc.ts=anc.ts)
 }
