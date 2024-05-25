@@ -7,7 +7,9 @@ const protoOXplot = {
   mtds: data.mtd,
   stop_esc: data.stop_esc,
   Npts: data.mtd.length,
-  Nperiods: data.mtd.length/3 + 2,
+  // NB: Since the table -data- is sorted by period,
+  //     the final row contains maximum period no.
+  Nperiods: data.trial[data.trial.length-1].period,
 };
 
 function oxFactory(opts, proto = protoOXplot) {

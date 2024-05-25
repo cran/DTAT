@@ -271,6 +271,8 @@ setMethod("as_d3_data", "DE",
                    ,trial = x@data
                    ,stop_esc = x@stop_esc
                    ,mtd_quantiles = rel_dose(x@mtd_quantiles)
+                   ,dose_drop_threshold = x@dose_drop_threshold
+                   ,stop_esc_under = x@stop_esc_under
                    ,ds = vector("list", max(x@data$period))
                    )
       # Fill out the $ds component

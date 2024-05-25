@@ -3,6 +3,8 @@ const protoDSplot = {
   height: height, 
   margin: dsMargin,
   ndoses: data.doses.length,
+  dose_drop_threshold: data.dose_drop_threshold, // 'bypass rule'
+  stop_esc_under: data.stop_esc_under,           // 'stop rule'
 };
 
 function dsFactory(opts, proto = protoDSplot) {
@@ -57,16 +59,16 @@ function renderDSplot(opts) {
 
   // 'Bypass rule' threshold
   dsPlot.svg.append('line')
-      .attr('x1', x(0.8))
-      .attr('x2', x(0.8))
+      .attr('x1', x(dsPlot.dose_drop_threshold))
+      .attr('x2', x(dsPlot.dose_drop_threshold))
       .attr('y1', y(1))
       .attr('y2', y(7))
       .attr('class','bypass-rule');
 
   // 'Stop rule' threshold
   dsPlot.svg.append('line')
-      .attr('x1', x(1/3))
-      .attr('x2', x(1/3))
+      .attr('x1', x(dsPlot.stop_esc_under))
+      .attr('x2', x(dsPlot.stop_esc_under))
       .attr('y1', y(1))
       .attr('y2', y(7))
       .attr('class','stop-rule');

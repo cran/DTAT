@@ -1,8 +1,8 @@
 Package: DTAT
 Type: Package
 Title: Dose Titration Algorithm Tuning
-Version: 0.3-6
-Date: 2023-03-29
+Version: 0.3-7
+Date: 2024-05-24
 Authors@R: person("David C.", "Norris"
                  , role = c("aut", "cre")
                  , email = "david@precisionmethods.guru"
@@ -29,6 +29,6 @@ VignetteBuilder: knitr, rmarkdown
 Encoding: UTF-8
 NeedsCompilation: no
 Author: David C. Norris [aut, cre]
-Packaged: 2023-03-29 19:09:10 UTC; david
+Packaged: 2024-05-24 22:10:03 UTC; david
 Repository: CRAN
-Date/Publication: 2023-03-29 19:40:02 UTC
+Date/Publication: 2024-05-25 02:20:03 UTC
