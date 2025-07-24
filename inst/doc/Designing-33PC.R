@@ -83,5 +83,5 @@ viz <- plot(trial)
 frameWidget(viz, height='350')
 
 ## ----start-the-app, eval=FALSE------------------------------------------------
-#  runDTATapp('Sim33PC')
+# runDTATapp('Sim33PC')
 

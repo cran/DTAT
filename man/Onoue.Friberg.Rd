@@ -136,7 +136,7 @@ doi:10.1200/JCO.2002.02.140.
 }
 }
 \seealso{
-\code{\link{pomp}}, \code{\link{sim}}
+\code{\link[pomp]{pomp}}, \code{\link{sim}}
 }
 \author{
 David C. Norris

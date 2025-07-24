@@ -57,7 +57,6 @@ NULL
 #' '3+3/PC' dose-finding study. Please see Norris (2017a) \doi{10.12688/f1000research.10624.3}
 #' and Norris (2017c) \doi{10.1101/240846}.
 #' @aliases DTAT-package DTAT
-#' @docType package
 #' @author David C. Norris
 #'
 #' @references
@@ -77,7 +76,7 @@ NULL
 #' 4. Norris DC. One-size-fits-all dosing in oncology wastes money, innovation
 #'    and lives. \emph{Drug Discov Today}. 2018;23(1):4-6.
 #'    \doi{10.1016/j.drudis.2017.11.008}.
-#'    \url{https://www.sciencedirect.com/science/article/pii/S1359644617303586}
+#'    \url{https://precisionmethods.guru/DTAT/Norris%20(2018)%20One-size-fits-all%20dosing%20in%20oncology%20wastes%20money,%20innovation%20and%20lives.pdf}
 #'
 #' 5. Norris DC. Costing \sQuote{the} MTD ... in 2-D. \emph{bioRxiv}. July 2018:370817.
 #'    \doi{10.1101/370817}.
@@ -86,7 +85,8 @@ NULL
 #' @importFrom pomp pomp rprior trajectory Csnippet
 #' @import survival
 #' @import methods
-NULL
+#' @keywords internal
+"_PACKAGE"
 
 
 

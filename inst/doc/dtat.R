@@ -107,19 +107,19 @@ pkpd <- pomp(data = df
 )
 
 ## ----JustForTesting, echo=FALSE, eval=FALSE---------------------------------------------
-#  id <- 7
-#  traj <- trajectory(pkpd,
-#                     params=c(pop[pop$id==id, -which(names(pop) %in% c('id','MTT'))]
-#                              , sigma=0.05
-#                              , dose=50
-#                              , duration=1
-#                              , Cc.0 = 0.0
-#                              , Cp.0 = 0.0
-#                              , Prol.0 = Circ0
-#                              , Tx.1.0 = Circ0
-#                              , Tx.2.0 = Circ0
-#                              , Tx.3.0 = Circ0
-#                              , Circ.0 = Circ0)) |> as.data.frame()
+# id <- 7
+# traj <- trajectory(pkpd,
+#                    params=c(pop[pop$id==id, -which(names(pop) %in% c('id','MTT'))]
+#                             , sigma=0.05
+#                             , dose=50
+#                             , duration=1
+#                             , Cc.0 = 0.0
+#                             , Cp.0 = 0.0
+#                             , Prol.0 = Circ0
+#                             , Tx.1.0 = Circ0
+#                             , Tx.2.0 = Circ0
+#                             , Tx.3.0 = Circ0
+#                             , Circ.0 = Circ0)) |> as.data.frame()
 
 ## ----FirstDose, tidy=FALSE--------------------------------------------------------------
 # initial conditions and output times
